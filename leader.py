@@ -14,7 +14,7 @@ def whose_the_leader(node_id):
 		#Is there a leader available
 		try:
 			result = client.read('/carrier_test/leader')
-			if result.value == str(node_id):
+			if str(result.value) == str(node_id):
 				print "I AM THE LEADER"
 		except:
 			result = client.write('/carrier_test/leader', str(node_id),ttl=20)

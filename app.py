@@ -12,7 +12,7 @@ def hello():
     leader = None
     try:
         result = client.read('/carrier_test/leader')
-        if result.value == node_id:
+        if str(result.value) == str(node_id):
             leader = "ME"
         else:
             leader = result.value
