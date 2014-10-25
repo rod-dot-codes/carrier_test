@@ -22,6 +22,7 @@ def whose_the_leader(node_id):
 
 		sleep_duration = int(random.randrange(0,60))
 		print "Sleeping for %s seconds" % (sleep_duration)
+		time.sleep(sleep_duration)
 
 if __name__ == "__main__":
 	node_id = os.environ.get('node_id')
