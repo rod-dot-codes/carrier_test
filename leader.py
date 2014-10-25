@@ -10,7 +10,7 @@ def whose_the_leader(node_id):
 	while True:
 		client = etcd.Client(host='172.17.42.1',port=4001)
 		#Tell my peers that I exist
-		client.write('/carrier_test/%s', 1,ttl=61)
+		client.write('/carrier_test/%s' % node_id, 1,ttl=61)
 		#Is there a leader available
 		result = client.read('/carrier_test/leader')
 		if result.value == None:
@@ -27,5 +27,6 @@ def whose_the_leader(node_id):
 		print "Sleeping for %s seconds" % (sleep_duration)
 
 if __name__ == "__main__":
-	node_id = print os.environ.get('node_id')
+	node_id = os.environ.get('node_id')
+	print "Node ID is %s" % node_id
 	whose_the_leader(node_id)
