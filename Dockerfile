@@ -1,4 +1,4 @@
-FROM ubuntu:wheezy
+FROM debian:wheezy
 RUN apt-get update
 RUN apt-get install -y python python-pip supervisor uwsgi libffi-dev
 EXPOSE 5000
