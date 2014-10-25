@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template
+from flask import make_response
 import etcd
 import os
 app = Flask(__name__)
@@ -17,7 +18,9 @@ def hello():
 			leader = result.value
 	except:
 		pass
-	return render_template('whoami.html', leader=leader)
+	response = make_response(render_template('whoami.html', leader=leader))
+    response.headers['proudly-served-by'] = str(node_id)
+    return response
 
 if __name__ == "__main__":
     app.run()
