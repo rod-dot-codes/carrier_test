@@ -1,9 +1,12 @@
 from flask import Flask
 from flask import render_template
+import etcd
+import os
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
+	client = etcd.Client(host='172.17.42.1',port=4001)
 	node_id = os.environ.get('node_id')
 	leader = None
 	try:
