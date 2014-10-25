@@ -1,6 +1,6 @@
 FROM debian:wheezy
 RUN apt-get update
-RUN apt-get install -y python python-pip supervisor uwsgi libffi-dev
+RUN apt-get install -y python python-pip supervisor uwsgi libffi-dev python-dev
 EXPOSE 5000
 ADD . /opt/apps/carrier_test
 RUN pip install -r /opt/apps/carrier_test/requirements.txt
