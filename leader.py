@@ -12,17 +12,14 @@ def whose_the_leader(node_id):
 		#Tell my peers that I exist
 		client.write('/carrier_test/%s' % node_id, 1,ttl=61)
 		#Is there a leader available
-		result = client.read('/carrier_test/leader')
-		if result.value == None:
-			#Try to become leader
-			result.value = node_id
-			result.ttl = 10 #TTL of 10 seconds till it expires
-			try:
-				print "Trying to become the leader"
-				updated = Client.update(result)
-				print "I am the leader"
-			except:
-				print "Damn, someone became leader before me"
+		try:
+			result = client.read('/carrier_test/leader')
+			if result.value == node_id:
+				print "I AM THE LEADER"
+		except:
+			result = client.write('/carrier_test/leader', node_id,ttl=20)
+			print result
+
 		sleep_duration = int(random.randrange(0,60))
 		print "Sleeping for %s seconds" % (sleep_duration)
 
